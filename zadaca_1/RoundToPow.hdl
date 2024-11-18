@@ -1,0 +1,75 @@
+CHIP RoundToPow {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+
+    Mux16(a=false, b[0]=true, sel=in[0], out=stage0);
+    Mux16(a=stage0, b[1]=true, sel=in[1], out=stage1);
+    Mux16(a=stage1, b[2]=true, sel=in[2], out=stage2);
+    Mux16(a=stage2, b[3]=true, sel=in[3], out=stage3);
+    Mux16(a=stage3, b[4]=true, sel=in[4], out=stage4);
+    Mux16(a=stage4, b[5]=true, sel=in[5], out=stage5);
+    Mux16(a=stage5, b[6]=true, sel=in[6], out=stage6);
+    Mux16(a=stage6, b[7]=true, sel=in[7], out=stage7);
+    Mux16(a=stage7, b[8]=true, sel=in[8], out=stage8);
+    Mux16(a=stage8, b[9]=true, sel=in[9], out=stage9);
+    Mux16(a=stage9, b[10]=true, sel=in[10], out=stage10);
+    Mux16(a=stage10, b[11]=true, sel=in[11], out=stage11);
+    Mux16(a=stage11, b[12]=true, sel=in[12], out=stage12);
+    Mux16(a=stage12, b[13]=true, sel=in[13], out=stage13);
+    Mux16(a=stage13, b[14]=true, sel=in[14], out=stage14);
+    Mux16(a=stage14, b[15]=true, sel=in[15], out=potentialPowPos);
+
+    And16(a=potentialPowPos, b=in, out=exactMatch);
+    Or16Way(in=exactMatch, out=isExactPow2);
+
+    Mux16(a=stage14, b=potentialPowPos, sel=isExactPow2, out=adjustedPosPow);
+
+    Not(in=in[15], out=isPositive);
+    Mux16(a=false, b=adjustedPosPow, sel=isPositive, out=out); 
+    /*
+    Not16(in=p, out=notIn);
+    And16(a=in, b=notIn, out=onlyOneBit);
+    Or16Way(in=onlyOneBit, out=isExactPow22);
+    Not(in = isExactPow22, out = isExactPow2);
+
+    Or(a=potentialPowPos[0], b=false, out=potentialPowPos0);
+    Or(a=potentialPowPos[1], b=false, out=potentialPowPos1);
+    Or(a=potentialPowPos[2], b=false, out=potentialPowPos2);
+    Or(a=potentialPowPos[3], b=false, out=potentialPowPos3);
+    Or(a=potentialPowPos[4], b=false, out=potentialPowPos4);
+    Or(a=potentialPowPos[5], b=false, out=potentialPowPos5);
+    Or(a=potentialPowPos[6], b=false, out=potentialPowPos6);
+    Or(a=potentialPowPos[7], b=false, out=potentialPowPos7);
+    Or(a=potentialPowPos[8], b=false, out=potentialPowPos8);
+    Or(a=potentialPowPos[9], b=false, out=potentialPowPos9);
+    Or(a=potentialPowPos[10], b=false, out=potentialPowPos10);
+    Or(a=potentialPowPos[11], b=false, out=potentialPowPos11);
+    Or(a=potentialPowPos[12], b=false, out=potentialPowPos12);
+    Or(a=potentialPowPos[13], b=false, out=potentialPowPos13);
+    Or(a=potentialPowPos[14], b=false, out=potentialPowPos14);
+    Or(a=potentialPowPos[15], b=false, out=potentialPowPos15);
+
+    Mux16(a=false, b[0]=true, sel=potentialPowPos0, out=stepBack0);
+    Mux16(a=stepBack0, b[1]=true, sel=potentialPowPos2, out=stepBack1);
+    Mux16(a=stepBack1, b[2]=true, sel=potentialPowPos3, out=stepBack2);
+    Mux16(a=stepBack2, b[3]=true, sel=potentialPowPos4, out=stepBack3);
+    Mux16(a=stepBack3, b[4]=true, sel=potentialPowPos5, out=stepBack4);
+    Mux16(a=stepBack4, b[5]=true, sel=potentialPowPos6, out=stepBack5);
+    Mux16(a=stepBack5, b[6]=true, sel=potentialPowPos7, out=stepBack6);
+    Mux16(a=stepBack6, b[7]=true, sel=potentialPowPos8, out=stepBack7);
+    Mux16(a=stepBack7, b[8]=true, sel=potentialPowPos9, out=stepBack8);
+    Mux16(a=stepBack8, b[9]=true, sel=potentialPowPos10, out=stepBack9);
+    Mux16(a=stepBack9, b[10]=true, sel=potentialPowPos11, out=stepBack10);
+    Mux16(a=stepBack10, b[11]=true, sel=potentialPowPos12, out=stepBack11);
+    Mux16(a=stepBack11, b[12]=true, sel=potentialPowPos13, out=stepBack12);
+    Mux16(a=stepBack12, b[13]=true, sel=potentialPowPos14, out=stepBack13);
+    Mux16(a=stepBack13, b[14]=true, sel=potentialPowPos15, out=stepBack14);
+
+
+    Mux16(a=stepBack14, b=potentialPowPos, sel=isExactPow2, out=adjustedPosPow);
+
+    Not(in=in[15], out=isPositive);
+    Mux16(a=false, b=adjustedPosPow, sel=isPositive, out=out); */
+}

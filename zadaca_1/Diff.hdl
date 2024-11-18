@@ -1,0 +1,57 @@
+CHIP Diff {
+    IN a[16], b[16];
+    OUT out[16];
+
+    PARTS:
+
+    Xor(a = a[0],  b = b[0],  out = x0);
+    Xor(a = a[1],  b = b[1],  out = x1);
+    Xor(a = a[2],  b = b[2],  out = x2);
+    Xor(a = a[3],  b = b[3],  out = x3);
+    Xor(a = a[4],  b = b[4],  out = x4);
+    Xor(a = a[5],  b = b[5],  out = x5);
+    Xor(a = a[6],  b = b[6],  out = x6);
+    Xor(a = a[7],  b = b[7],  out = x7);
+    Xor(a = a[8],  b = b[8],  out = x8);
+    Xor(a = a[9],  b = b[9],  out = x9);
+    Xor(a = a[10], b = b[10], out = x10);
+    Xor(a = a[11], b = b[11], out = x11);
+    Xor(a = a[12], b = b[12], out = x12);
+    Xor(a = a[13], b = b[13], out = x13);
+    Xor(a = a[14], b = b[14], out = x14);
+    Xor(a = a[15], b = b[15], out = x15);
+    // out = x0 + x1 + ... + x15
+    And(a = x0, b = true, out = and0);
+    And(a = x1, b = true, out = and1);
+    And(a = x2, b = true, out = and2);
+    And(a = x3, b = true, out = and3);
+    And(a = x4, b = true, out = and4);
+    And(a = x5, b = true, out = and5);
+    And(a = x6, b = true, out = and6);
+    And(a = x7, b = true, out = and7);
+    And(a = x8, b = true, out = and8);
+    And(a = x9, b = true, out = and9);
+    And(a = x10, b = true, out = and10);
+    And(a = x11, b = true, out = and11);
+    And(a = x12, b = true, out = and12);
+    And(a = x13, b = true, out = and13);
+    And(a = x14, b = true, out = and14);
+    And(a = x15, b = true, out = and15);
+    //
+    Add16(a[0] = and0, b[0] = and1, out = add0);
+    Add16(a = add0, b[0] = and2, out = add1);
+    Add16(a = add1, b[0] = and3, out = add2);
+    Add16(a = add2, b[0] = and4, out = add3);
+    Add16(a = add3, b[0] = and5, out = add4);
+    Add16(a = add4, b[0] = and6, out = add5);
+    Add16(a = add5, b[0] = and7, out = add6);
+    Add16(a = add6, b[0] = and8, out = add7);
+    Add16(a = add7, b[0] = and9, out = add8);
+    Add16(a = add8, b[0] = and10, out = add9);
+    Add16(a = add9, b[0] = and11, out = add10);
+    Add16(a = add10, b[0] = and12, out = add11);
+    Add16(a = add11, b[0] = and13, out = add12);
+    Add16(a = add12, b[0] = and14, out = add13);
+    Add16(a = add13, b[0] = and15, out = out);
+    
+}

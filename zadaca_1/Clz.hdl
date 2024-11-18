@@ -1,0 +1,73 @@
+CHIP Clz {
+    IN in[16];
+    OUT out[16];
+
+    PARTS: // ova moja implementacija dodaje +1 ako je MSB jednak 0, to se lako može izmjeniti u 54. liniji
+           // ako se u zadatku mislilo drugačije
+    Not(in = in[15], out = not15);
+    And(a = not15, b = true, out = enable15);
+
+    Not(in = in[14], out = not14);
+    And(a = not14, b = enable15, out = enable14);
+
+    Not(in = in[13], out = not13);
+    And(a = not13, b = enable14, out = enable13);
+
+    Not(in = in[12], out = not12);
+    And(a = not12, b = enable13, out = enable12);
+
+    Not(in = in[11], out = not11);
+    And(a = not11, b = enable12, out = enable11);
+
+    Not(in = in[10], out = not10);
+    And(a = not10, b = enable11, out = enable10);
+
+    Not(in = in[9], out = not9);
+    And(a = not9, b = enable10, out = enable9);
+
+    Not(in = in[8], out = not8);
+    And(a = not8, b = enable9, out = enable8);
+
+    Not(in = in[7], out = not7);
+    And(a = not7, b = enable8, out = enable7);
+
+    Not(in = in[6], out = not6);
+    And(a = not6, b = enable7, out = enable6);
+
+    Not(in = in[5], out = not5);
+    And(a = not5, b = enable6, out = enable5);
+
+    Not(in = in[4], out = not4);
+    And(a = not4, b = enable5, out = enable4);
+
+    Not(in = in[3], out = not3);
+    And(a = not3, b = enable4, out = enable3);
+
+    Not(in = in[2], out = not2);
+    And(a = not2, b = enable3, out = enable2);
+
+    Not(in = in[1], out = not1);
+    And(a = not1, b = enable2, out = enable1);
+
+    Not(in = in[0], out = not0);
+    And(a = not0, b = enable1, out = enable0);
+
+    Add16(a[0] = false, b[0] = enable15, out = count1);
+    Add16(a = count1, b[0] = enable14, out = count2);
+    Add16(a = count2, b[0] = enable13, out = count3);
+    Add16(a = count3, b[0] = enable12, out = count4);
+    Add16(a = count4, b[0] = enable11, out = count5);
+    Add16(a = count5, b[0] = enable10, out = count6);
+    Add16(a = count6, b[0] = enable9, out = count7);
+    Add16(a = count7, b[0] = enable8, out = count8);
+    Add16(a = count8, b[0] = enable7, out = count9);
+    Add16(a = count9, b[0] = enable6, out = count10);
+    Add16(a = count10, b[0] = enable5, out = count11);
+    Add16(a = count11, b[0] = enable4, out = count12);
+    Add16(a = count12, b[0] = enable3, out = count13);
+    Add16(a = count13, b[0] = enable2, out = count14);
+    Add16(a = count14, b[0] = enable1, out = count15);
+    Add16(a = count15, b[0] = enable0, out = out);
+
+
+}
